@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Tour = () => {
+const Tour = ({ src, price, title, description, handleClick }) => {
+  const [hidden, setHidden] = useState(true);
+
   return (
     <div className="single-tour">
-      <img className="tour-img" src="https://images2.imgbox.com/d6/91/DLtwCiTn_o.jpg" />
-      <span className="tour-price">$1,995</span>
+      <img className="tour-img" src={src} />
+      <span className="tour-price">${price}</span>
       <div className="tour-info">
-        <h5>Best Of Paris In 7 Days Tour</h5>
+        <h5>{title}</h5>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-          voluptates totam et sed ea, aperiam distinctio, dicta dolore
-          temporibus quos perspiciatis veniam quod. Corporis libero blanditiis
-          illo placeat minus consequuntur.
-          <button className="show-info">Read more</button>
+          {hidden ? `${description.substring(0, 200)}...` : description}
+          <button className="show-info" onClick={() => setHidden(!hidden)}>
+            {hidden ? 'Read more' : 'Read less'}
+          </button>
         </p>
       </div>
-      <button>Not Interested</button>
+      <button className="delete-btn" onClick={handleClick}>
+        Not Interested
+      </button>
     </div>
   );
 };
